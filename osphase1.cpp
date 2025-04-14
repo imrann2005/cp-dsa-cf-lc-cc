@@ -214,7 +214,7 @@ void WRITE()
 {
     cout<<"\nWrite interrupt called\n";
     ofstream f;
-    f.open("output.txt");
+    f.open("output.txt",ios::app);
     bool flag = true;
     int loc = (IR[2] - '0') * 10 + (IR[3] - '0');
     for (int i = loc; (i <= loc + 9) && flag; i++)
@@ -232,6 +232,8 @@ void WRITE()
         }
         
     }
+   
+    f.close();
     EUP();
     
 }
@@ -239,8 +241,10 @@ void WRITE()
 void TERMINATE()
 {
     ofstream f;
+    f.open("output.txt",ios::app);
     cout<<"\nProgram Terminated!\n";
-    f<<endl<<endl;
+    f<<"\n\n"<<endl;
+    f.close();
 }
 
 void START_EXECUTION()
