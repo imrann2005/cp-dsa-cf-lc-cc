@@ -15,23 +15,23 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(int n) {
+void solve(string&s,int n) {
     // Write your solution here
-    
-        int mx = INT_MIN;
-        int a=1,b=n-1;
-      for (int i = 2; i*i <= n; i++)
-      {
-        if(n%i == 0){
-            a = n/i;
-            b = n-a;
-            break;
+    map<char,int>mpp;
+    for (int i = 0; i < n; i++)
+    {
+        if(mpp.find(s[i]) == mpp.end()){
+            mpp[s[i]] = i;
         }
-      }
+    }
+    ll sum = 0;
+    for (auto x : mpp)
+    {
+        /* code */
+        sum += (n-x.second);
+    }
 
-      cout<<a<<" "<<b<<endl;
-      
-  
+    cout<<sum<<endl;
     
 }
 
@@ -42,8 +42,10 @@ int main() {
     cin >> t;
     while (t--) {
         int n;
-        cin>>n;
-        solve(n);
+        cin >> n;
+        string s;
+        cin >> s;
+        solve(s,n);
     }
 
     return 0;

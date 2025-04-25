@@ -15,23 +15,20 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(int n) {
+void solve(vi&a,int n) {
     // Write your solution here
-    
-        int mx = INT_MIN;
-        int a=1,b=n-1;
-      for (int i = 2; i*i <= n; i++)
-      {
-        if(n%i == 0){
-            a = n/i;
-            b = n-a;
-            break;
-        }
-      }
+    ll d = abs(a[0]-a[n-1]);
+    int i=1;
+    int j=n-2;
+    while (i<j)
+    {
+        ll d2 = abs(a[i]-a[j]);
+        d = __gcd(d2,d);
+        i++;
+        j--;
+    }
 
-      cout<<a<<" "<<b<<endl;
-      
-  
+    cout<<d<<endl;
     
 }
 
@@ -43,7 +40,13 @@ int main() {
     while (t--) {
         int n;
         cin>>n;
-        solve(n);
+        vi a(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin>>a[i];
+        }
+        
+        solve(a,n);
     }
 
     return 0;

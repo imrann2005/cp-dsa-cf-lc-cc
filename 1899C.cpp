@@ -15,28 +15,51 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(string&a,int n) {
+void solve(vi&a,int n) {
     // Write your solution here
-    for (int i = 1; i < n; i++)
-    {
-        if((a[i]-'a') < (a[i-1]-'a')){
-            yes;
-            cout<<i-1+1<<" "<<i+1<<endl;
-            return;
-        }
+    ll s = a[0];
+    ll mx = s;
+    int i = 1;
+    if(s < 0){
+        s = 0;
     }
-    no;  
+    while (i<n)
+    {
+        if((a[i]&1)==(a[i-1]&1)){
+            s = 0;
+            s+=a[i];
+            mx = max(mx,s);
+        }
+        else{
+            s += a[i];
+            mx = max(mx,s);
+        }
+        if(s<0){
+            s = 0;
+        }
+        i++;
+    }
+
+    cout<<mx<<endl;
+    
 }
 
 int main() {
     fast_io;
 
+    int t;
+    cin >> t;
+    while (t--) {
         int n;
         cin >> n;
-        string a;
-        cin >> a;
+        vi a(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        
         solve(a,n);
-    
+    }
 
     return 0;
 }

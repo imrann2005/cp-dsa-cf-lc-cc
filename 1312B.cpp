@@ -15,24 +15,14 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(int n) {
+void solve(vi&a,int n) {
     // Write your solution here
-    
-        int mx = INT_MIN;
-        int a=1,b=n-1;
-      for (int i = 2; i*i <= n; i++)
-      {
-        if(n%i == 0){
-            a = n/i;
-            b = n-a;
-            break;
-        }
-      }
-
-      cout<<a<<" "<<b<<endl;
-      
-  
-    
+    sort(all(a),greater<int>());
+    for (int i = 0; i < n; i++)
+    {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
 }
 
 int main() {
@@ -42,8 +32,14 @@ int main() {
     cin >> t;
     while (t--) {
         int n;
-        cin>>n;
-        solve(n);
+        cin >> n;
+        vi a(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        
+        solve(a,n);
     }
 
     return 0;

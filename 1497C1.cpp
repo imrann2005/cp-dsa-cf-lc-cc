@@ -15,24 +15,21 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(int n) {
+void solve(ll n) {
     // Write your solution here
-    
-        int mx = INT_MIN;
-        int a=1,b=n-1;
-      for (int i = 2; i*i <= n; i++)
-      {
-        if(n%i == 0){
-            a = n/i;
-            b = n-a;
-            break;
+    if(n&1){
+        cout<<(n>>1)<<" "<<(n>>1)<<" "<<1<<endl;
+    }
+    else{
+        int x = n/2;
+        if(x&1){
+            cout<<((n-2)>>1)<<" "<<((n-2)>>1)<<" "<<2<<endl;
+           
         }
-      }
-
-      cout<<a<<" "<<b<<endl;
-      
-  
-    
+        else{
+            cout<<(n>>2)<<" "<<(n>>2)<<" "<<(n>>1)<<endl;
+        }
+    }
 }
 
 int main() {
@@ -41,8 +38,9 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        int n;
-        cin>>n;
+        ll n,k;
+        cin >> n>>k;
+
         solve(n);
     }
 

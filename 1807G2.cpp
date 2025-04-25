@@ -15,23 +15,32 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(int n) {
+void solve(vll&a,int n) {
     // Write your solution here
-    
-        int mx = INT_MIN;
-        int a=1,b=n-1;
-      for (int i = 2; i*i <= n; i++)
-      {
-        if(n%i == 0){
-            a = n/i;
-            b = n-a;
-            break;
-        }
-      }
+    sort(all(a));
+    vll pre(n);
+    ll s = 0;
+    for (int i = 0; i < n; i++)
+    {
+        s+=a[i];
+        pre[i] = s;
+    }
+    if(a[0]!=1){
+        no;
+        return;
+    }
+    for (int i = 1; i < n; i++)
+    {
+        if(a[i] <= pre[i-1]){
 
-      cout<<a<<" "<<b<<endl;
-      
-  
+        }
+        else{
+            no;
+            return;
+        }
+    }
+    yes;
+
     
 }
 
@@ -43,7 +52,13 @@ int main() {
     while (t--) {
         int n;
         cin>>n;
-        solve(n);
+        vll a(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin>>a[i];
+        }
+        
+        solve(a,n);
     }
 
     return 0;

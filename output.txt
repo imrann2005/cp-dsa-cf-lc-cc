@@ -1,6 +1,8 @@
-HELLO World
-
-
-HELLO
+HELLO-WORLD                     
+HELLO-WORLD                     
+No error
+IR: H   
+IC= 4
+TTC= 5   TTL= 5   TLC= 2   TLL= 2
 
 
