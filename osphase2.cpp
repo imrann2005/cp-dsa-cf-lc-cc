@@ -559,7 +559,7 @@ void load()
 
         if (buff[0] == '$' && buff[1] == 'A' && buff[2] == 'M' && buff[3] == 'J')
         {
-            init();
+            init();//We initialize all the DS in this function
             term = 0;
             TI = 0;
             PI = 0;
@@ -567,7 +567,7 @@ void load()
             buffsize = 0;
             flag = 0;
             lcount = 0;
-            //   For TTL
+            //   TTL Extraction
             char a[4];
             int z;
             int i;
@@ -608,6 +608,7 @@ void load()
 
             p1.initialize(TTL, TLL);
             cout << "\n TTL =" << p1.ttl << "  TLL= " << p1.tll << endl;
+            //For Page Table
             allnum = allocate();
             PTR = allnum * 10;
             cout << "PTR=  " << PTR << endl;
@@ -631,7 +632,7 @@ void load()
                 mem[i][0] = '*';
                 cout << "        mem[" << i << "][0]= " << mem[i][0] << endl;
             }
-            cout << "Buffsize = " << buffsize << endl;
+            cout << "No. of instructions: = " << buffsize << endl;
 
             int j, instruction_pos = 0;
             PTE = allocate();
