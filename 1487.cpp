@@ -18,34 +18,12 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(vi &a, int n)
+void solveB(ll n, ll k)
 {
     // Write your solution here
-    for (int i = 0; i < n; i++)
-    {
-        if (a[i] == 1)
-            a[i]++;
-    }
-
-    for (int i = 1; i < n; i++)
-    {
-        if ((a[i] % a[i - 1]) == 0)
-        {
-            a[i]++;
-        }
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        cout << a[i] << " ";
-    }
-    cout << endl;
-}
-
-void solveC()
-{
-    
-    return;
+    k--;
+    int f = n/2;
+    cout<<((k+(n%2)*(k/f))%n)+1<<endl;
 }
 
 int main()
@@ -56,15 +34,10 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        vi a(n);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
-        }
-
-        solve(a, n);
+        ll n;
+        ll k;
+        cin >> n >> k;
+        solveB(n, k);
     }
 
     return 0;

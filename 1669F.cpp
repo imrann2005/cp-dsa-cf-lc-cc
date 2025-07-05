@@ -18,6 +18,39 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
+void solveH(vll &a, ll n, ll k)
+{
+    vll f(31, 0);
+    for (int i = 0; i < n; i++)
+    {
+        int j = 0;
+        while (j <= 30)
+        {
+            /* code */
+            if ((1 << j) & (a[i]))
+            {
+                f[j]++;
+            }
+            j++;
+        }
+    }
+    ll ans = 0;
+    for (int i = 30; i >= 0; i--)
+    {
+        /* code */
+        ll need = n - f[i];
+        if(need == 0){
+           ans = ans + pow(2, i); 
+        }
+        else if (k >= need)
+        {
+            k -= need;
+            ans = ans + pow(2, i);
+        }
+    }
+    cout << ans << endl;
+}
+
 void solve(vll &a, int n)
 {
     // Write your solution here
@@ -35,25 +68,28 @@ void solve(vll &a, int n)
         s += a[i];
         suf[i] = s;
     }
-    int i=0;
-    int j=n-1;
+    int i = 0;
+    int j = n - 1;
     int mx = 0;
-    while (i<j)
+    while (i < j)
     {
-        if(p[i]<suf[j]){
+        if (p[i] < suf[j])
+        {
             i++;
         }
-        else if(p[i]==suf[j]){
-            int cnt = (i-0+1)+(n-1-j+1);
-            mx = max(mx,cnt);
+        else if (p[i] == suf[j])
+        {
+            int cnt = (i - 0 + 1) + (n - 1 - j + 1);
+            mx = max(mx, cnt);
             i++;
             j--;
         }
-        else{
+        else
+        {
             j--;
         }
     }
-    cout<<mx<<endl;
+    cout << mx << endl;
 }
 
 int main()
@@ -64,15 +100,15 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
+        ll n, k;
+        cin >> n >> k;
         vll a(n);
         for (int i = 0; i < n; i++)
         {
             cin >> a[i];
         }
 
-        solve(a, n);
+        solveH(a, n, k);
     }
 
     return 0;

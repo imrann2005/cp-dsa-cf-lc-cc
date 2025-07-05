@@ -44,6 +44,29 @@ void solveE(vector<vector<char>> &a, int n)
     cout<<cnt<<endl;
 }
 
+void solveF(vll&a,ll n){
+    vll v;
+    //vll ind
+    for (int i = 1; i <= n; i++)
+    {
+        if(a[i] < i){
+            v.pb(a[i]);
+        }
+    }
+    sort(all(v));
+    ll cnt = 0;
+    ll size = v.size();
+    for (int i = 1; i <= n; i++)
+    {
+        if(a[i] < i){
+            ll x = v.end() - upper_bound(all(v),i);
+            if(x == 0)break;
+            cnt += x;
+        }
+    }
+    cout<<cnt<<endl;
+}
+
 int main()
 {
     fast_io;
@@ -52,18 +75,24 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
+        ll n;
         cin >> n;
-        vector<vector<char>> a(n, vector<char>(n));
-        for (int i = 0; i < n; i++)
+        vll a(n+1);
+        for (int i = 1; i <= n; i++)
         {
-            for (int j = 0; j < n; j++)
-            {
-                cin >> a[i][j];
-            }
+            cin>>a[i];
         }
+        solveF(a,n);
+        // vector<vector<char>> a(n, vector<char>(n));
+        // for (int i = 0; i < n; i++)
+        // {
+        //     for (int j = 0; j < n; j++)
+        //     {
+        //         cin >> a[i][j];
+        //     }
+        // }
 
-        solveE(a, n);
+        //solveE(a, n);
     }
 
     return 0;

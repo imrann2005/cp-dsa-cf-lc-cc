@@ -18,34 +18,25 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(vi &a, int n)
+void solveB1(string &s, int n)
 {
     // Write your solution here
+    ll cnt = 0;
+    if(n==1 && s[0]=='0'){
+        cout<<"BOB\n";
+        return;
+    }
     for (int i = 0; i < n; i++)
     {
-        if (a[i] == 1)
-            a[i]++;
+        if(s[i] == '0')cnt++;
     }
-
-    for (int i = 1; i < n; i++)
-    {
-        if ((a[i] % a[i - 1]) == 0)
-        {
-            a[i]++;
-        }
+    if(cnt == 0){
+        cout<<"DRAW\n";
     }
-
-    for (int i = 0; i < n; i++)
-    {
-        cout << a[i] << " ";
+    else if(cnt % 2 == 0){
+        cout<<"BOB\n";
     }
-    cout << endl;
-}
-
-void solveC()
-{
-    
-    return;
+    else cout<<"ALICE\n";
 }
 
 int main()
@@ -56,15 +47,11 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        vi a(n);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
-        }
-
-        solve(a, n);
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        solveB1(s,n);
     }
 
     return 0;

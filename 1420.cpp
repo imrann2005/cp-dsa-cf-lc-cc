@@ -1,10 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define fast_io              \
-    ios::sync_with_stdio(0); \
-    cin.tie(0);              \
-    cout.tie(0)
+#define fast_io ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
 #define ll long long
 #define vi vector<int>
 #define vll vector<ll>
@@ -18,53 +15,44 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(vi &a, int n)
-{
+void solveB(vll&a,ll n) {
     // Write your solution here
+    map<ll,ll>mpp;
+    ll cnt = 0;
     for (int i = 0; i < n; i++)
     {
-        if (a[i] == 1)
-            a[i]++;
-    }
-
-    for (int i = 1; i < n; i++)
-    {
-        if ((a[i] % a[i - 1]) == 0)
+        int j = 0;
+        int mx = -1;
+        while (j<31)
         {
-            a[i]++;
+            /* code */
+            if(a[i]&(1<<j)){
+                mx = max(mx,j);
+                
+            }
+            j++;
         }
+        cnt += mpp[mx];
+        mpp[mx]++;
     }
-
-    for (int i = 0; i < n; i++)
-    {
-        cout << a[i] << " ";
-    }
-    cout << endl;
+    cout<<cnt<<endl;
 }
 
-void solveC()
-{
-    
-    return;
-}
-
-int main()
-{
+int main() {
     fast_io;
 
     int t;
     cin >> t;
-    while (t--)
-    {
-        int n;
-        cin >> n;
-        vi a(n);
+    while (t--) {
+        ll n;
+        cin>>n;
+        vll a(n);
         for (int i = 0; i < n; i++)
         {
-            cin >> a[i];
+            cin>>a[i];
         }
-
-        solve(a, n);
+        
+        solveB(a,n);
     }
 
     return 0;

@@ -18,34 +18,43 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
-void solve(vi &a, int n)
+void solveB(ll n)
 {
     // Write your solution here
+    map<ll,ll>mpp;
+    bool ans = 0;
+    vector<vector<ll>>a;
     for (int i = 0; i < n; i++)
     {
-        if (a[i] == 1)
-            a[i]++;
-    }
-
-    for (int i = 1; i < n; i++)
-    {
-        if ((a[i] % a[i - 1]) == 0)
+        ll k;
+        cin >> k;
+        vll temp;
+        for (int j = 0; j < k; j++)
         {
-            a[i]++;
+            ll x;
+            cin >> x;
+            temp.pb(x);
+            mpp[x]++;
         }
+        a.pb(temp);
     }
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < a.size(); i++)
     {
-        cout << a[i] << " ";
+        bool f = 0;
+        for (int j = 0; j < a[i].size(); j++)
+        {
+            /* code */
+            if(mpp[a[i][j]] <= 1){
+                f = 1;
+            }
+        }
+        if(f == 0){
+            yes;
+            return;
+        }
+        
     }
-    cout << endl;
-}
-
-void solveC()
-{
-    
-    return;
+    no;
 }
 
 int main()
@@ -56,15 +65,10 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
+        ll n;
         cin >> n;
-        vi a(n);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
-        }
-
-        solve(a, n);
+        // vector<vll> a;
+        solveB(n);
     }
 
     return 0;
