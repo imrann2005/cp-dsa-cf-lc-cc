@@ -15,6 +15,115 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
+void solveD(){
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    int o=0;
+    int c=0;
+    for (int i = 0; i < n; i++)
+    {
+        if(s[i]=='('){
+            o++;
+        }
+        else{
+            c++;
+        }
+    }
+    if(o!=c){
+        cout<<-1<<endl;
+        return;
+    }
+    o=0,c=0;
+    stack<pair<char,int>>st;
+    vector<int>vis(n,0);
+    int cnt = 1;
+    bool f = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if(s[i]=='('){
+            //o++;
+            st.push({s[i],i});
+        }
+        else{
+            if(!st.empty()){
+                //o--;
+                int idx = st.top().second;
+                vis[i] = 1;
+                vis[idx] = 1;
+                st.pop();
+                f = 1;
+            }
+            else{
+                cnt = 2;
+            }
+        }
+    }
+
+    if(cnt==1){
+        cout<<cnt<<endl;
+        for (int i = 0; i < n; i++)
+        {
+            cout<<vis[i]<<" ";
+        }
+        cout<<endl;
+        return;
+
+    }
+    while (!st.empty())
+    {
+        /* code */
+        st.pop();
+    }
+    for (int i = 0; i < n; i++)
+    {
+        vis[i] = 0;
+    }
+    reverse(all(s));
+    cnt = 1;
+    f = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if(s[i]=='('){
+            //o++;
+            st.push({s[i],i});
+        }
+        else{
+            if(!st.empty()){
+                //o--;
+                int idx = st.top().second;
+                vis[i] = 1;
+                vis[idx] = 1;
+                st.pop();
+                f = 1;
+            }
+            else{
+                cnt = 2;
+            }
+        }
+    }
+    if(cnt==1){
+        cout<<cnt<<endl;
+        for (int i = 0; i < n; i++)
+        {
+            cout<<vis[i]<<" ";
+        }
+        cout<<endl;
+        return;
+
+    }
+    cout<<cnt<<endl;
+    for (int i = n-1; i >=0 ; i--)
+    {
+        if(vis[i]!=0){
+            cout<<1<<" ";
+        }
+        else cout<<2<<" ";
+    }
+    cout<<endl;
+}
+
 void solve(int x,int k) {
     // Write your solution here
     if(x % k != 0){
@@ -32,9 +141,7 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        int x,k;
-        cin>>x>>k;
-        solve(x,k);
+        solveD();
     }
 
     return 0;

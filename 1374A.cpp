@@ -50,18 +50,93 @@ void solve(ll n)
     }
 }
 
+void solveC(){
+        int n, k;
+		cin >> n >> k;
+		vector<int> a(n);
+		for (auto &it : a) cin >> it;
+		map<int, int> cnt;
+		int mx = 0;
+		for (auto &it : a) {
+			if (it % k == 0) continue;
+			++cnt[k - it % k];
+			mx = max(mx, cnt[k - it % k]);
+		}
+		long long ans = 0;
+		for (auto it : cnt) {
+            auto key = it.first;
+            auto value = it.second;
+			if (value == mx) {
+				ans = k * 1ll * (value - 1) + key + 1;
+			}
+		}
+		cout << ans << endl;
+}
+
+void threeVals(){
+    ll n,x;
+    cin>>n>>x;
+
+    vector<pair<int,int>> a(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin>>a[i].first;
+        a[i].second = i+1;
+    }
+    sort(all(a));
+    //2 7 5 1
+    //1 
+    
+    for(int i=0;i<n;i++){
+        ll s = a[i].first;
+        int j = i+1;
+        int k = n-1;
+
+        while (j<k)
+        {
+            /* code */
+            ll sum = a[j].first + a[k].first;
+            if(s + sum == x){
+                cout<<a[i].second<<" "<<a[j].second<<" "<<a[k].second<<endl;
+                return;
+            }
+            else if(s + sum > x){
+                k--;
+            }
+            else{
+                j++;
+            }
+        }
+        
+    }
+
+    cout<<"IMPOSSIBLE\n";
+}
+
 int main()
 {
     fast_io;
 
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        ll n;
-        cin >> n;
-        solve(n);
-    }
+    // int t;
+    // cin >> t;
+    // while (t--)
+    // {
+    //     // ll n;
+    //     // cin >> n;
+    //     // solve(n);
+    //     threeVals();
+    // }
+
+    threeVals();
 
     return 0;
 }
+
+/*
+2 7 5 1
+n=4,x=8
+
+1 2 5 7
+
+
+*/

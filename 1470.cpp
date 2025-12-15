@@ -15,6 +15,83 @@ using namespace std;
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 
+#include <vector>
+#include <string>
+#include <set>
+#include <algorithm> // For std::sort, std::transform
+#include <cctype>    // For isalnum
+#include <map>       // For custom sorting order
+
+class Solution {
+public:
+    std::vector<std::string> validateCoupons(std::vector<std::string>& code, std::vector<std::string>& businessLine, std::vector<bool>& isActive) {
+        int n = code.size();
+
+        // Define valid business lines and their custom sort order
+        std::map<std::string, int> bLineSortOrder;
+        bLineSortOrder["electronics"] = 0;
+        bLineSortOrder["grocery"] = 1;
+        bLineSortOrder["pharmacy"] = 2;
+        bLineSortOrder["restaurant"] = 3;
+
+        std::set<std::string> bset;
+        for (const auto& pair : bLineSortOrder) {
+            bset.insert(pair.first);
+        }
+        
+        std::vector<std::pair<std::string, std::string>> validCouponsData; 
+
+        for (int i = 0; i < n; ++i) {
+            
+            if (code[i].empty()) {
+                continue;
+            }
+            bool currentCodeIsValid = true;
+            for (char c : code[i]) {
+                if (!std::isalnum(c) && c != '_') { 
+                    currentCodeIsValid = false;
+                    break;
+                }
+            }
+            if (!currentCodeIsValid) {
+                continue; 
+            }
+            std::string currentBusinessLine = businessLine[i];
+            std::transform(currentBusinessLine.begin(), currentBusinessLine.end(), currentBusinessLine.begin(), ::tolower);
+
+            if (bset.find(currentBusinessLine) == bset.end()) {
+                continue; 
+            }
+
+
+            if (!isActive[i]) {
+                continue; 
+            }
+
+
+            validCouponsData.push_back({currentBusinessLine, code[i]});
+        }
+
+
+        std::sort(validCouponsData.begin(), validCouponsData.end(), [&](const std::pair<std::string, std::string>& a, const std::pair<std::string, std::string>& b) {
+            int orderA = bLineSortOrder[a.first];
+            int orderB = bLineSortOrder[b.first];
+
+            if (orderA != orderB) {
+                return orderA < orderB;
+            } else {
+                return a.second < b.second; 
+            }
+        });
+
+        vector<string> ans;
+        for (int i = 0; i < validCouponsData.size(); ++i) {
+            ans.push_back(validCouponsData[i].second);
+        }
+        return ans;
+    }
+};
+
 void solveA() {
     // Write your solution here
     ll n,m;

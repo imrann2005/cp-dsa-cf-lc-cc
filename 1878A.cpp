@@ -26,6 +26,75 @@ void solve(vi &arr,int n,int k) {
     }
     no;
 }
+int a[200000];
+int pre[30][200001];
+
+int works(int l,int val){
+    int ans = 0;
+    for (int i = 0; i < 30; i++)
+    {
+        if(pre[i][val+1]-pre[i][l]==0){
+            ans += (1<<i);
+        }
+    }
+    return ans;
+    
+}
+void solveE(){
+    ll n;
+    cin>>n;
+    for (int i = 0; i < n; i++)
+    {
+        cin>>a[i];
+    }
+    for (int j = 0; j < 30; j++)
+    {
+        pre[j][0] = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if((1<<j)&a[i]){
+                pre[j][i+1] = pre[j][i];
+            }
+            else{
+                pre[j][i+1] = pre[j][i] + 1;
+            }
+        }
+        
+    }
+
+    int q;
+    cin>>q;
+    while (q--)
+    {
+        /* code */
+        int l,k;
+        cin>>l>>k;
+        l--;
+        if(a[l] < k){
+            cout<<-1<<" ";
+            continue;
+        }
+        int low = l;
+        int high = n-1;
+
+        while (low <= high)
+        {
+            /* code */
+            int mid = (low+high)>>1;
+            if(works(l,mid) >= k){
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+
+        cout<<low<<" ";
+        
+    }
+    
+    
+}
 
 int main() {
     fast_io;
@@ -33,15 +102,16 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        int n,k;
-        cin>>n>>k;
-        vi arr(n);
-        for (size_t i = 0; i < n; i++)
-        {
-            cin>>arr[i];
-        }
+        // int n,k;
+        // cin>>n>>k;
+        // vi arr(n);
+        // for (size_t i = 0; i < n; i++)
+        // {
+        //     cin>>arr[i];
+        // }
         
-        solve(arr,n,k);
+        // solve(arr,n,k);
+        solveE();
     }
 
     return 0;
